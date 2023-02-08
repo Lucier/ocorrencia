@@ -1,0 +1,55 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+directive @key(fields: String!) on OBJECT | INTERFACE
+
+directive @extends on OBJECT | INTERFACE
+
+directive @external on OBJECT | FIELD_DEFINITION
+
+directive @requires(fields: String!) on FIELD_DEFINITION
+
+directive @provides(fields: String!) on FIELD_DEFINITION
+
+type Occurrence {
+  id: ID!
+  student: String!
+  classroom: String!
+  sex: String!
+  age: Float!
+  description: String!
+  registration: String!
+}
+
+type Query {
+  occurrences: [Occurrence!]!
+  occurrence(id: String!): Occurrence!
+  occurrenceByStudent(student: String!): Occurrence!
+  occurrenceByClassroom(classroom: String!): Occurrence!
+}
+
+type Mutation {
+  createOccurrence(data: CreateOccurrenceInput!): Occurrence!
+  updateOccurrence(data: UpdateOccurrenceInput!): Occurrence!
+  removeOccurrence(id: String!): Occurrence!
+}
+
+input CreateOccurrenceInput {
+  student: String!
+  classroom: String!
+  sex: String!
+  age: Float!
+  description: String!
+  registration: String!
+}
+
+input UpdateOccurrenceInput {
+  student: String!
+  classroom: String!
+  sex: String!
+  age: Float!
+  description: String!
+  registration: String!
+  id: String!
+}

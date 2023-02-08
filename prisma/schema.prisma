@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Occurrence {
+  id           String @id @default(uuid())
+  student      String
+  classroom    String
+  sex          String
+  age          Int
+  description  String
+  registration String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@map("occurrences")
+}
