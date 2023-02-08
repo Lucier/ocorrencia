@@ -9,6 +9,9 @@ export class Occurrence {
   student: string
 
   @Field()
+  school: string
+
+  @Field()
   classroom: string
 
   @Field()
