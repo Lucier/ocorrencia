@@ -10,6 +10,9 @@ export class UpdateOccurrenceInput extends PartialType(CreateOccurrenceInput) {
   student: string
 
   @Field()
+  school: string
+
+  @Field()
   classroom: string
 
   @Field()
@@ -19,8 +22,8 @@ export class UpdateOccurrenceInput extends PartialType(CreateOccurrenceInput) {
   age: number
 
   @Field()
-  description: string
+  registration: string
 
   @Field()
-  registration: string
+  description: string
 }

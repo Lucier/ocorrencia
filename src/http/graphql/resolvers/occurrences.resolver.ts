@@ -31,11 +31,19 @@ export class OccurrencesResolver {
 
   @Query(() => Occurrence)
   async occurrenceByClassroom(@Args('classroom') classroom: string) {
-    const classrooms = await this.occurencesService.getOccurrenceByStudent(
+    const classrooms = await this.occurencesService.getOccurrenceByClassroom(
       classroom,
     )
 
     return classrooms
+  }
+
+  @Query(() => Occurrence)
+  async occurrenceByRegistration(@Args('registration') registration: string) {
+    const registrations =
+      await this.occurencesService.getOccurrenceByRegistration(registration)
+
+    return registrations
   }
 
   @Mutation(() => Occurrence)

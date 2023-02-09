@@ -6,6 +6,9 @@ export class CreateOccurrenceInput {
   student: string
 
   @Field()
+  school: string
+
+  @Field()
   classroom: string
 
   @Field()
@@ -15,8 +18,8 @@ export class CreateOccurrenceInput {
   age: number
 
   @Field()
-  description: string
+  registration: string
 
   @Field()
-  registration: string
+  description: string
 }

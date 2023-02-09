@@ -10,11 +10,12 @@ datasource db {
 model Occurrence {
   id           String @id @default(uuid())
   student      String
+  school       String
   classroom    String
   sex          String
   age          Int
-  description  String
   registration String
+  description  String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt

@@ -21,8 +21,8 @@ export class Occurrence {
   age: number
 
   @Field()
-  description: string
+  registration: string
 
   @Field()
-  registration: string
+  description: string
 }

@@ -3,6 +3,7 @@ import { PrismaService } from '../database/prisma/prisma.service'
 
 interface CreateOccurrenceParams {
   student: string
+  school: string
   classroom: string
   sex: string
   age: number
@@ -13,6 +14,7 @@ interface CreateOccurrenceParams {
 interface UpdateOccurrenceParams {
   id: string
   student: string
+  school: string
   classroom: string
   sex: string
   age: number
@@ -52,22 +54,32 @@ export class OccurrencesService {
     })
   }
 
+  getOccurrenceByRegistration(registration: string) {
+    return this.prisma.occurrence.findFirst({
+      where: {
+        registration,
+      },
+    })
+  }
+
   async createOccurrence({
     student,
+    school,
     classroom,
     sex,
     age,
-    description,
     registration,
+    description,
   }: CreateOccurrenceParams) {
     return this.prisma.occurrence.create({
       data: {
         student,
+        school,
         classroom,
         sex,
         age,
-        description,
         registration,
+        description,
       },
     })
   }
@@ -75,11 +87,12 @@ export class OccurrencesService {
   async updateOccurrence({
     id,
     student,
+    school,
     classroom,
     sex,
     age,
-    description,
     registration,
+    description,
   }: UpdateOccurrenceParams) {
     return this.prisma.occurrence.update({
       where: {
@@ -87,11 +100,12 @@ export class OccurrencesService {
       },
       data: {
         ...(student && { student }),
+        ...(school && { school }),
         ...(classroom && { classroom }),
         ...(sex && { sex }),
         ...(age && { age }),
-        ...(description && { description }),
         ...(registration && { registration }),
+        ...(description && { description }),
       },
     })
   }

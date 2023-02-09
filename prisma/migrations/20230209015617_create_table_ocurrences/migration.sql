@@ -2,6 +2,7 @@
 CREATE TABLE "occurrences" (
     "id" TEXT NOT NULL,
     "student" TEXT NOT NULL,
+    "school" TEXT NOT NULL,
     "classroom" TEXT NOT NULL,
     "sex" TEXT NOT NULL,
     "age" INTEGER NOT NULL,

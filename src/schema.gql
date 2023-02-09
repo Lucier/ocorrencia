@@ -15,11 +15,12 @@ directive @provides(fields: String!) on FIELD_DEFINITION
 type Occurrence {
   id: ID!
   student: String!
+  school: String!
   classroom: String!
   sex: String!
   age: Float!
-  description: String!
   registration: String!
+  description: String!
 }
 
 type Query {
@@ -27,6 +28,7 @@ type Query {
   occurrence(id: String!): Occurrence!
   occurrenceByStudent(student: String!): Occurrence!
   occurrenceByClassroom(classroom: String!): Occurrence!
+  occurrenceByRegistration(registration: String!): Occurrence!
 }
 
 type Mutation {
@@ -37,19 +39,21 @@ type Mutation {
 
 input CreateOccurrenceInput {
   student: String!
+  school: String!
   classroom: String!
   sex: String!
   age: Float!
-  description: String!
   registration: String!
+  description: String!
 }
 
 input UpdateOccurrenceInput {
   student: String!
+  school: String!
   classroom: String!
   sex: String!
   age: Float!
-  description: String!
   registration: String!
+  description: String!
   id: String!
 }
