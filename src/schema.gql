@@ -18,23 +18,40 @@ type Occurrence {
   school: String!
   classroom: String!
   sex: String!
-  age: Float!
+  age: String!
   registration: String!
+  date: String!
   description: String!
+}
+
+type User {
+  id: ID!
+  email: String!
+  name: String!
+}
+
+type LoginResponse {
+  access_token: String!
+  user: User!
 }
 
 type Query {
   occurrences: [Occurrence!]!
   occurrence(id: String!): Occurrence!
-  occurrenceByStudent(student: String!): Occurrence!
-  occurrenceByClassroom(classroom: String!): Occurrence!
-  occurrenceByRegistration(registration: String!): Occurrence!
+  occurrenceByStudent(student: String!): [Occurrence!]!
+  occurrenceByClassroom(classroom: String!): [Occurrence!]!
+  occurrenceBySchool(school: String!): [Occurrence!]!
+  occurrenceByRegistration(registration: String!): [Occurrence!]!
+  users: [User!]!
+  userById(id: String!): User!
+  userByEmail(email: String!): User!
 }
 
 type Mutation {
   createOccurrence(data: CreateOccurrenceInput!): Occurrence!
-  updateOccurrence(data: UpdateOccurrenceInput!): Occurrence!
-  removeOccurrence(id: String!): Occurrence!
+  createUser(data: CreateUserInput!): User!
+  login(loginUserInput: LoginUserInput!): LoginResponse!
+  signup(signupUserInput: CreateUserInput!): User!
 }
 
 input CreateOccurrenceInput {
@@ -42,18 +59,19 @@ input CreateOccurrenceInput {
   school: String!
   classroom: String!
   sex: String!
-  age: Float!
+  age: String!
   registration: String!
+  date: String!
   description: String!
 }
 
-input UpdateOccurrenceInput {
-  student: String!
-  school: String!
-  classroom: String!
-  sex: String!
-  age: Float!
-  registration: String!
-  description: String!
-  id: String!
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
+}
+
+input LoginUserInput {
+  email: String!
+  password: String!
 }

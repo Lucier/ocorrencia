@@ -18,10 +18,13 @@ export class Occurrence {
   sex: string
 
   @Field()
-  age: number
+  age: string
 
   @Field()
   registration: string
+
+  @Field()
+  date: string
 
   @Field()
   description: string

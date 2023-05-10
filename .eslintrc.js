@@ -7,8 +7,10 @@ module.exports = {
   },
   plugins: ['@typescript-eslint/eslint-plugin'],
   extends: [
+    '@rocketseat/eslint-config/node',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
+    
   ],
   root: true,
   env: {
@@ -21,5 +23,8 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    'no-useless-constructor': 'off',
+    'no-unused-vars': 'off'
+
   },
 };

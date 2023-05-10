@@ -8,17 +8,29 @@ datasource db {
 }
 
 model Occurrence {
-  id           String @id @default(uuid())
+  id           String   @id @default(uuid())
   student      String
   school       String
   classroom    String
   sex          String
-  age          Int
+  age          String
   registration String
+  date         String
   description  String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now()) @updatedAt
+
+  @@map("occurrences")
+}
+
+model User {
+  id       String @id @default(uuid())
+  email    String @unique
+  name     String
+  password String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 
-  @@map("occurrences")
+  @@map("users")
 }

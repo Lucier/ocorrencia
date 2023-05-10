@@ -19,10 +19,13 @@ export class UpdateOccurrenceInput extends PartialType(CreateOccurrenceInput) {
   sex: string
 
   @Field()
-  age: number
+  age: string
 
   @Field()
   registration: string
+
+  @Field()
+  date: string
 
   @Field()
   description: string

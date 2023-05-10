@@ -1,7 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { OccurrencesService } from '../../../services/occurrences.service'
 import { CreateOccurrenceInput } from '../inputs/create-occurrence-input'
-import { UpdateOccurrenceInput } from '../inputs/update-occurrence-input'
 import { Occurrence } from '../models/occurrence'
 
 @Resolver(() => Occurrence)
@@ -20,30 +19,39 @@ export class OccurrencesResolver {
     return occurrence
   }
 
-  @Query(() => Occurrence)
+  @Query(() => [Occurrence])
   async occurrenceByStudent(@Args('student') student: string) {
-    const students = await this.occurencesService.getOccurrenceByStudent(
+    const occurrences = await this.occurencesService.getOccurrenceByStudent(
       student,
     )
 
-    return students
+    return occurrences
   }
 
-  @Query(() => Occurrence)
+  @Query(() => [Occurrence])
   async occurrenceByClassroom(@Args('classroom') classroom: string) {
-    const classrooms = await this.occurencesService.getOccurrenceByClassroom(
+    const occurrences = await this.occurencesService.getOccurrenceByClassroom(
       classroom,
     )
 
-    return classrooms
+    return occurrences
   }
 
-  @Query(() => Occurrence)
+  @Query(() => [Occurrence])
+  async occurrenceBySchool(@Args('school') school: string) {
+    const occurrences = await this.occurencesService.getOccurrenceBySchool(
+      school,
+    )
+
+    return occurrences
+  }
+
+  @Query(() => [Occurrence])
   async occurrenceByRegistration(@Args('registration') registration: string) {
-    const registrations =
+    const occurrences =
       await this.occurencesService.getOccurrenceByRegistration(registration)
 
-    return registrations
+    return occurrences
   }
 
   @Mutation(() => Occurrence)
@@ -51,13 +59,13 @@ export class OccurrencesResolver {
     return this.occurencesService.createOccurrence(data)
   }
 
-  @Mutation(() => Occurrence)
-  updateOccurrence(@Args('data') data: UpdateOccurrenceInput) {
-    return this.occurencesService.updateOccurrence(data)
-  }
+  // @Mutation(() => Occurrence)
+  // updateOccurrence(@Args('data') data: UpdateOccurrenceInput) {
+  //   return this.occurencesService.updateOccurrence(data)
+  // }
 
-  @Mutation(() => Occurrence)
-  removeOccurrence(@Args('id') id: string) {
-    return this.occurencesService.removeOccurrence(id)
-  }
+  // @Mutation(() => Occurrence)
+  // removeOccurrence(@Args('id') id: string) {
+  //   return this.occurencesService.removeOccurrence(id)
+  // }
 }

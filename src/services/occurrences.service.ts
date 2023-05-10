@@ -6,21 +6,23 @@ interface CreateOccurrenceParams {
   school: string
   classroom: string
   sex: string
-  age: number
+  age: string
   registration: string
+  date: string
   description: string
 }
 
-interface UpdateOccurrenceParams {
-  id: string
-  student: string
-  school: string
-  classroom: string
-  sex: string
-  age: number
-  registration: string
-  description: string
-}
+// interface UpdateOccurrenceParams {
+//   id: string
+//   student: string
+//   school: string
+//   classroom: string
+//   sex: string
+//   age: number
+//   registration: string
+//   date: string
+//   description: string
+// }
 
 @Injectable()
 export class OccurrencesService {
@@ -39,15 +41,18 @@ export class OccurrencesService {
   }
 
   getOccurrenceByStudent(student: string) {
-    return this.prisma.occurrence.findFirst({
+    return this.prisma.occurrence.findMany({
       where: {
-        student,
+        student: {
+          equals: student,
+          mode: 'insensitive',
+        },
       },
     })
   }
 
   getOccurrenceByClassroom(classroom: string) {
-    return this.prisma.occurrence.findFirst({
+    return this.prisma.occurrence.findMany({
       where: {
         classroom,
       },
@@ -55,9 +60,20 @@ export class OccurrencesService {
   }
 
   getOccurrenceByRegistration(registration: string) {
-    return this.prisma.occurrence.findFirst({
+    return this.prisma.occurrence.findMany({
       where: {
         registration,
+      },
+    })
+  }
+
+  getOccurrenceBySchool(school: string) {
+    return this.prisma.occurrence.findMany({
+      where: {
+        school: {
+          equals: school,
+          mode: 'insensitive',
+        },
       },
     })
   }
@@ -69,6 +85,7 @@ export class OccurrencesService {
     sex,
     age,
     registration,
+    date,
     description,
   }: CreateOccurrenceParams) {
     return this.prisma.occurrence.create({
@@ -79,42 +96,57 @@ export class OccurrencesService {
         sex,
         age,
         registration,
+        date,
         description,
       },
     })
   }
 
-  async updateOccurrence({
-    id,
-    student,
-    school,
-    classroom,
-    sex,
-    age,
-    registration,
-    description,
-  }: UpdateOccurrenceParams) {
-    return this.prisma.occurrence.update({
-      where: {
-        id,
-      },
-      data: {
-        ...(student && { student }),
-        ...(school && { school }),
-        ...(classroom && { classroom }),
-        ...(sex && { sex }),
-        ...(age && { age }),
-        ...(registration && { registration }),
-        ...(description && { description }),
-      },
-    })
-  }
+  // async updateOccurrence({
+  //   id,
+  //   student,
+  //   school,
+  //   classroom,
+  //   sex,
+  //   age,
+  //   registration,
+  //   date,
+  //   description,
+  // }: UpdateOccurrenceParams) {
+  //   return this.prisma.occurrence.update({
+  //     where: {
+  //       id,
+  //     },
+  //     data: {
+  //       ...(student && { student }),
+  //       ...(school && { school }),
+  //       ...(classroom && { classroom }),
+  //       ...(sex && { sex }),
+  //       ...(age && { age }),
+  //       ...(registration && { registration }),
+  //       ...(date && { date }),
+  //       ...(description && { description }),
+  //     },
+  //   })
+  // }
 
-  async removeOccurrence(id: string) {
-    return this.prisma.occurrence.delete({
-      where: {
-        id,
-      },
-    })
-  }
+  // async update(
+  //   where: Prisma.OccurrenceWhereUniqueInput,
+  //   data: Prisma.OccurrenceUpdateInput,
+  // ) {
+  //   const occurrence = this.prisma.occurrence.update({
+  //     where,
+  //     data,
+  //   })
+
+  //   return occurrence
+  // }
+
+  // async removeOccurrence(id: string) {
+  //   return this.prisma.occurrence.delete({
+  //     where: {
+  //       id,
+  //     },
+  //   })
+  // }
 }
